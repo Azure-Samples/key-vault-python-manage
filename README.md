@@ -4,9 +4,19 @@ platforms: python
 author: lmazuel
 ---
 
-# key-vault-python-manage
-An example illustrating how to use Python to manage Key Vault
-## Running this sample
+# Manage key vaults with Python
+
+This sample demonstrates how to manage key vaults in Azure using the Python SDK.
+
+**On this page**
+
+- [Run this sample](#run)
+- [What does example.py do?](#example)
+    - [Create a key vault](#create)
+    - [Delete a key vault](#delete)
+
+<a id="run"/>
+## Run this sample
 
 1. If you don't already have it, [install Python](https://www.python.org/downloads/).
 
@@ -52,9 +62,85 @@ or [Azure Portal](http://azure.microsoft.com/documentation/articles/resource-gro
     python example.py
     ```
 
-## Deploy this sample to Azure
-Coming soon...
-## About the code
-Coming soon...
-## More information
-Coming soon...
+<a id="example"></a>
+## What is example.rb doing?
+
+This sample starts by setting up ResourceManagementClient and KeyVaultManagementClient objects using your subscription and credentials.
+
+```python
+#
+# Create the Resource Manager Client with an Application (service principal) token provider
+#
+subscription_id = os.environ.get(
+    'AZURE_SUBSCRIPTION_ID',
+    '11111111-1111-1111-1111-111111111111') # your Azure Subscription Id
+credentials = ServicePrincipalCredentials(
+    client_id=os.environ['AZURE_CLIENT_ID'],
+    secret=os.environ['AZURE_CLIENT_SECRET'],
+    tenant=os.environ['AZURE_TENANT_ID']
+)
+kv_client = KeyVaultManagementClient(credentials, subscription_id)
+resource_client = ResourceManagementClient(credentials, subscription_id)
+```
+
+It registers the subscription for the "Microsoft.KeyVault" namespace
+and creates a resource group and a storage account where the media services will be managed.
+
+```python
+# You MIGHT need to add KeyVault as a valid provider for these credentials
+# If so, this operation has to be done only once for each credentials
+resource_client.providers.register('Microsoft.KeyVault')
+
+# Create Resource group
+resource_group_params = {'location': WEST_US}
+resource_client.resource_groups.create_or_update(GROUP_NAME, resource_group_params)
+```
+
+There is a supporting function (`print`) that print a resource group and it's properties.
+With that set up, the sample lists all resource groups for your subscription, it performs these operations.
+
+<a id="create"></a>
+### Create a key vault
+
+```python
+vault = kv_client.vaults.create_or_update(
+    GROUP_NAME,
+    KV_NAME,
+    {
+        'location': WEST_US,
+        'properties': {
+            'sku': {
+                'name': 'standard'
+            },
+            # Fake random GUID
+            'tenant_id': '6819f86e-5d41-47b0-9297-334f33d7922d',
+            'access_policies': [{
+                'tenant_id': '6819f86e-5d41-47b0-9297-334f33d7922d',
+                'object_id': '6819f86e-5d41-47b0-9297-334f33d7922d',
+                'permissions': {
+                    'keys': ['all'],
+                    'secrets': ['all']
+                }
+            }]
+        }
+    }
+)
+```
+
+<a id="list"></a>
+### List key vaults
+
+This code lists the first 5 key vaults.
+
+```python
+vaults = keyvault_client.vaults.list(5)
+```
+
+<a id="delete"></a>
+### Delete a key vault
+
+```python
+delete_async_operation = resource_client.resource_groups.delete(GROUP_NAME)
+delete_async_operation.wait()
+print("\nDeleted: {}".format(GROUP_NAME))
+```
