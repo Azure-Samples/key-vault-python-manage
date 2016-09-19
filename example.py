@@ -55,11 +55,10 @@ def run_example():
                 'sku': {
                     'name': 'standard'
                 },
-                # Fake random GUID
-                'tenant_id': '6819f86e-5d41-47b0-9297-334f33d7922d',
+                'tenant_id': os.environ['AZURE_TENANT_ID'],
                 'access_policies': [{
-                    'tenant_id': '6819f86e-5d41-47b0-9297-334f33d7922d',
-                    'object_id': '6819f86e-5d41-47b0-9297-334f33d7922d',
+                    'tenant_id': os.environ['AZURE_TENANT_ID'],
+                    'object_id': os.environ['AZURE_TENANT_ID'],
                     'permissions': {
                         'keys': ['all'],
                         'secrets': ['all']
