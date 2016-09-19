@@ -129,10 +129,11 @@ vault = kv_client.vaults.create_or_update(
 <a id="list"></a>
 ### List key vaults
 
-This code lists the first 5 key vaults.
+This code lists the key vaults.
 
 ```python
-vaults = keyvault_client.vaults.list(5)
+for vault in kv_client.vaults.list():
+    print_item(vault)
 ```
 
 <a id="delete"></a>

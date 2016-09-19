@@ -69,6 +69,11 @@ def run_example():
     )
     print_item(vault)
 
+    # List the Key vaults
+    print('\nList KeyVault')
+    for vault in kv_client.vaults.list():
+        print_item(vault)
+
     # Delete Resource group and everything in it
     print('\nDelete Resource Group')
     delete_async_operation = resource_client.resource_groups.delete(GROUP_NAME)
