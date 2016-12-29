@@ -3,10 +3,13 @@ import json
 from azure.common.credentials import ServicePrincipalCredentials
 from azure.mgmt.keyvault import KeyVaultManagementClient
 from azure.mgmt.resource.resources import ResourceManagementClient
+from haikunator import Haikunator
+
+haikunator = Haikunator()
 
 WEST_US = 'westus'
 GROUP_NAME = 'azure-sample-group'
-KV_NAME = 'keyvault-sample'
+KV_NAME = haikunator.haikunate()
 
 # Manage resources and resource groups - create, update and delete a resource group,
 # deploy a solution into a resource group, export an ARM template. Create, read, update
