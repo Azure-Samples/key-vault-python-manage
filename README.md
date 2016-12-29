@@ -115,7 +115,7 @@ vault = kv_client.vaults.create_or_update(
             'tenant_id': os.environ['AZURE_TENANT_ID'],
             'access_policies': [{
                 'tenant_id': os.environ['AZURE_TENANT_ID'],
-                'object_id': os.environ['AZURE_TENANT_ID'],
+                'object_id': OBJECT_ID,
                 'permissions': {
                     'keys': ['all'],
                     'secrets': ['all']
@@ -125,6 +125,8 @@ vault = kv_client.vaults.create_or_update(
     }
 )
 ```
+
+The object ID is unique for a User or an Application. Find this number in the portal.
 
 <a id="list"></a>
 ### List key vaults

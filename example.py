@@ -10,6 +10,8 @@ haikunator = Haikunator()
 WEST_US = 'westus'
 GROUP_NAME = 'azure-sample-group'
 KV_NAME = haikunator.haikunate()
+#The object ID of the User or Application for access policies. Find this number in the portal
+OBJECT_ID = '00000000-0000-0000-0000-000000000000'
 
 # Manage resources and resource groups - create, update and delete a resource group,
 # deploy a solution into a resource group, export an ARM template. Create, read, update
@@ -61,7 +63,7 @@ def run_example():
                 'tenant_id': os.environ['AZURE_TENANT_ID'],
                 'access_policies': [{
                     'tenant_id': os.environ['AZURE_TENANT_ID'],
-                    'object_id': os.environ['AZURE_TENANT_ID'],
+                    'object_id': OBJECT_ID,
                     'permissions': {
                         'keys': ['all'],
                         'secrets': ['all']
