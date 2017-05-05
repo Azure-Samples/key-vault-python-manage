@@ -150,3 +150,7 @@ delete_async_operation = resource_client.resource_groups.delete(GROUP_NAME)
 delete_async_operation.wait()
 print("\nDeleted: {}".format(GROUP_NAME))
 ```
+
+Deleting a resource is an asynchronous operation which may take some time, so the object
+returned from `delete` represents an operation in progress. Calling `wait` on it
+forces the caller to wait until it finishes.
