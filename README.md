@@ -15,7 +15,7 @@ This sample demonstrates how to manage key vaults in Azure using the Python SDK.
     - [Create a key vault](#create)
     - [Delete a key vault](#delete)
 
-<a id="run"/>
+<a id="run"></a>
 ## Run this sample
 
 1. If you don't already have it, [install Python](https://www.python.org/downloads/).
