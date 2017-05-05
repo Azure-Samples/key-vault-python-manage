@@ -15,7 +15,7 @@ This sample demonstrates how to manage key vaults in Azure using the Python SDK.
     - [Create a key vault](#create)
     - [Delete a key vault](#delete)
 
-<a id="run"/>
+<a id="run"></a>
 ## Run this sample
 
 1. If you don't already have it, [install Python](https://www.python.org/downloads/).
@@ -63,17 +63,16 @@ or [Azure Portal](http://azure.microsoft.com/documentation/articles/resource-gro
     ```
 
 <a id="example"></a>
-## What is example.rb doing?
+## What is example.py doing?
 
-This sample starts by setting up ResourceManagementClient and KeyVaultManagementClient objects using your subscription and credentials.
+This sample starts by setting up `ResourceManagementClient` and `KeyVaultManagementClient` objects using your subscription and credentials.
 
 ```python
 #
 # Create the Resource Manager Client with an Application (service principal) token provider
 #
-subscription_id = os.environ.get(
-    'AZURE_SUBSCRIPTION_ID',
-    '11111111-1111-1111-1111-111111111111') # your Azure Subscription Id
+subscription_id = os.environ['AZURE_SUBSCRIPTION_ID']
+
 credentials = ServicePrincipalCredentials(
     client_id=os.environ['AZURE_CLIENT_ID'],
     secret=os.environ['AZURE_CLIENT_SECRET'],
@@ -93,11 +92,12 @@ resource_client.providers.register('Microsoft.KeyVault')
 
 # Create Resource group
 resource_group_params = {'location': WEST_US}
-resource_client.resource_groups.create_or_update(GROUP_NAME, resource_group_params)
+print_item(resource_client.resource_groups.create_or_update(GROUP_NAME, resource_group_params))
 ```
 
-There is a supporting function (`print`) that print a resource group and it's properties.
-With that set up, the sample lists all resource groups for your subscription, it performs these operations.
+Here, the `create_or_update` method returns a `ResourceGroup` object
+after performing the appropriate operation,
+and the supporting function `print_item` prints some of its attributes.
 
 <a id="create"></a>
 ### Create a key vault
@@ -126,12 +126,16 @@ vault = kv_client.vaults.create_or_update(
 )
 ```
 
-The object ID is unique for a User or an Application. Find this number in the portal.
+The object ID is unique for a User or an Application. Find this number in the Azure Active Directory blade of the Azure portal:
+* To find a User's object ID, navigate to "Users and groups" > "All users", search for the user name, and click it.
+* To find an Application's object ID, search for the application name under "App registrations" and click it.
+
+In either of these cases, you can then find the object ID in the Essentials box.
 
 <a id="list"></a>
 ### List key vaults
 
-This code lists the key vaults.
+This code lists some attributes of all available key vaults.
 
 ```python
 for vault in kv_client.vaults.list():
@@ -146,3 +150,7 @@ delete_async_operation = resource_client.resource_groups.delete(GROUP_NAME)
 delete_async_operation.wait()
 print("\nDeleted: {}".format(GROUP_NAME))
 ```
+
+Deleting a resource is an asynchronous operation which may take some time, so the object
+returned from `delete` represents an operation in progress. Calling `wait` on it
+forces the caller to wait until it finishes.
