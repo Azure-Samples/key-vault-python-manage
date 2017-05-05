@@ -129,6 +129,7 @@ vault = kv_client.vaults.create_or_update(
 The object ID is unique for a User or an Application. Find this number in the Azure Active Directory blade of the Azure portal:
 * To find a User's object ID, navigate to "Users and groups" > "All users", search for the user name, and click it.
 * To find an Application's object ID, search for the application name under "App registrations" and click it.
+
 In either of these cases, you can then find the object ID in the Essentials box.
 
 <a id="list"></a>
