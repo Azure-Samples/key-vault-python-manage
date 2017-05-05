@@ -95,7 +95,7 @@ resource_group_params = {'location': WEST_US}
 resource_client.resource_groups.create_or_update(GROUP_NAME, resource_group_params)
 ```
 
-There is a supporting function (`print`) that print a resource group and it's properties.
+There is a supporting function (`print`) that prints a resource group and its properties.
 With that set up, the sample lists all resource groups for your subscription, it performs these operations.
 
 <a id="create"></a>
@@ -125,7 +125,10 @@ vault = kv_client.vaults.create_or_update(
 )
 ```
 
-The object ID is unique for a User or an Application. Find this number in the portal.
+The object ID is unique for a User or an Application. Find this number in the Azure Active Directory blade of the Azure portal:
+* To find a User's object ID, navigate to "Users and groups" > "All users", search for the user name, and click it.
+* To find an Application's object ID, search for the application name under "App registrations" and click it.
+In either of these cases, you can then find the object ID in the Essentials box.
 
 <a id="list"></a>
 ### List key vaults
