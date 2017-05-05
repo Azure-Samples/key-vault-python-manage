@@ -65,7 +65,7 @@ or [Azure Portal](http://azure.microsoft.com/documentation/articles/resource-gro
 <a id="example"></a>
 ## What is example.py doing?
 
-This sample starts by setting up ResourceManagementClient and KeyVaultManagementClient objects using your subscription and credentials.
+This sample starts by setting up `ResourceManagementClient` and `KeyVaultManagementClient` objects using your subscription and credentials.
 
 ```python
 #
