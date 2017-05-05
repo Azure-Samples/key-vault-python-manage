@@ -92,11 +92,12 @@ resource_client.providers.register('Microsoft.KeyVault')
 
 # Create Resource group
 resource_group_params = {'location': WEST_US}
-resource_client.resource_groups.create_or_update(GROUP_NAME, resource_group_params)
+print_item(resource_client.resource_groups.create_or_update(GROUP_NAME, resource_group_params))
 ```
 
-There is a supporting function (`print`) that prints a resource group and its properties.
-With that set up, the sample lists all resource groups for your subscription, it performs these operations.
+Here, the `create_or_update` method returns a `ResourceGroup` object
+after performing the appropriate operation,
+and the supporting function `print_item` prints some of its attributes.
 
 <a id="create"></a>
 ### Create a key vault
@@ -133,7 +134,7 @@ In either of these cases, you can then find the object ID in the Essentials box.
 <a id="list"></a>
 ### List key vaults
 
-This code lists the key vaults.
+This code lists some attributes of all available key vaults.
 
 ```python
 for vault in kv_client.vaults.list():
