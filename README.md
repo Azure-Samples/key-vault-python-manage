@@ -71,9 +71,8 @@ This sample starts by setting up `ResourceManagementClient` and `KeyVaultManagem
 #
 # Create the Resource Manager Client with an Application (service principal) token provider
 #
-subscription_id = os.environ.get(
-    'AZURE_SUBSCRIPTION_ID',
-    '11111111-1111-1111-1111-111111111111') # your Azure Subscription Id
+subscription_id = os.environ['AZURE_SUBSCRIPTION_ID']
+
 credentials = ServicePrincipalCredentials(
     client_id=os.environ['AZURE_CLIENT_ID'],
     secret=os.environ['AZURE_CLIENT_SECRET'],
