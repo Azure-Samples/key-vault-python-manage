@@ -1,5 +1,5 @@
 ---
-services: keyvault
+services: key-vault
 platforms: python
 author: lmazuel
 ---
