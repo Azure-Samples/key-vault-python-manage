@@ -10,7 +10,7 @@ haikunator = Haikunator()
 WEST_US = 'westus'
 GROUP_NAME = 'azure-sample-group'
 KV_NAME = haikunator.haikunate()
-#The object ID of the User or Application for access policies. Find this number in the portal
+# The object ID of the User or Application for access policies. Find this number in the portal
 OBJECT_ID = '00000000-0000-0000-0000-000000000000'
 
 # Manage resources and resource groups - create, update and delete a resource group,
@@ -24,6 +24,8 @@ OBJECT_ID = '00000000-0000-0000-0000-000000000000'
 # AZURE_CLIENT_SECRET: with your Azure Active Directory Application Secret
 # AZURE_SUBSCRIPTION_ID: with your Azure Subscription Id
 #
+
+
 def run_example():
     """Resource Group management example."""
     #
@@ -46,7 +48,8 @@ def run_example():
     # Create Resource group
     print('\nCreate Resource Group')
     resource_group_params = {'location': WEST_US}
-    print_item(resource_client.resource_groups.create_or_update(GROUP_NAME, resource_group_params))
+    print_item(resource_client.resource_groups.create_or_update(
+        GROUP_NAME, resource_group_params))
 
     # Create a vault
     print('\nCreate a vault')
@@ -84,12 +87,14 @@ def run_example():
     delete_async_operation.wait()
     print("\nDeleted: {}".format(GROUP_NAME))
 
+
 def print_item(group):
     """Print an instance."""
     print("\tName: {}".format(group.name))
     print("\tId: {}".format(group.id))
     print("\tLocation: {}".format(group.location))
     print("\tTags: {}".format(group.tags))
+
 
 if __name__ == "__main__":
     run_example()
