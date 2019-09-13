@@ -1,7 +1,11 @@
 ---
-services: key-vault
-platforms: python
-author: lmazuel
+page_type: sample
+languages:
+- python
+products:
+- azure
+description: "This sample demonstrates how to manage key vaults in Azure using the Python SDK."
+urlFragment: key-vault-python-manage
 ---
 
 # Manage key vaults with Python
